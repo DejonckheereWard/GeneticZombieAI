@@ -38,11 +38,19 @@ private:
 	UINT m_InventorySlot = 0;
 
 
+	// Vars for actions
+	Elite::Vector2 m_DesiredVelocity{};
+	float m_DesiredRotationVelocity{};  // In Degrees
+	float m_Sprint{};
+
 	// Actions for the RL Agent
-	void RotateLeft();
-	void RotateRight();
-	void MoveForward();
-	void MoveBackward();
+	void RotateLeft() { m_DesiredRotationVelocity = 1.0f; };
+	void RotateRight() { m_DesiredRotationVelocity = -1.0f; };
+	void MoveForward() { m_DesiredVelocity.x = 1.0f; };
+	void MoveBackward() { m_DesiredVelocity.x = -1.0f; };
+	void MoveRight() { m_DesiredVelocity.y = -1.0f; };
+	void MoveLeft() { m_DesiredVelocity.y = 1.0f; };
+	void Sprint() { m_Sprint = true; };
 };
 
 //ENTRY

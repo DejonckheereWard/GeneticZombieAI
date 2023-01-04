@@ -56,17 +56,36 @@ void Plugin::InitGameDebugParams(GameDebugParams& params)
 //(=Use only for Debug Purposes)
 void Plugin::Update(float dt)
 {
+
 	//Demo Event Code
 	//In the end your AI should be able to walk around without external input
 	if(m_pInterface->Input_IsMouseButtonUp(Elite::InputMouseButton::eLeft))
 	{
 	}
-	else if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_W))
+
+	if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_W))
 	{
 		MoveForward();
 	}
-	else if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_S)) {
-
+	if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_S))
+	{
+		MoveBackward();
+	}
+	if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_A))
+	{
+		MoveLeft();
+	}
+	if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_D))
+	{
+		MoveRight();
+	}
+	if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_Left))
+	{
+		RotateLeft();
+	}
+	if(m_pInterface->Input_IsKeyboardKeyDown(Elite::eScancode_Right))
+	{
+		RotateRight();
 	}
 }
 
@@ -78,13 +97,6 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 
 	//Use the Interface (IAssignmentInterface) to 'interface' with the AI_Framework
 	auto agentInfo = m_pInterface->Agent_GetInfo();
-
-
-	//Use the navmesh to calculate the next navmesh point
-	//auto nextTargetPos = m_pInterface->NavMesh_GetClosestPathPoint(checkpointLocation);
-
-	//OR, Use the mouse target
-	auto nextTargetPos = m_pInterface->NavMesh_GetClosestPathPoint(m_Target); //Uncomment this to use mouse position as guidance
 
 	auto vHousesInFOV = GetHousesInFOV();//uses m_pInterface->Fov_GetHouseByIndex(...)
 	auto vEntitiesInFOV = GetEntitiesInFOV(); //uses m_pInterface->Fov_GetEntityByIndex(...)
@@ -99,57 +111,22 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 		}
 	}
 
-	//INVENTORY USAGE DEMO
-	//********************
-
-	if(m_GrabItem)
-	{
-		ItemInfo item;
-		//Item_Grab > When DebugParams.AutoGrabClosestItem is TRUE, the Item_Grab function returns the closest item in range
-		//Keep in mind that DebugParams are only used for debugging purposes, by default this flag is FALSE
-		//Otherwise, use GetEntitiesInFOV() to retrieve a vector of all entities in the FOV (EntityInfo)
-		//Item_Grab gives you the ItemInfo back, based on the passed EntityHash (retrieved by GetEntitiesInFOV)
-		if(m_pInterface->Item_Grab({}, item))
-		{
-			//Once grabbed, you can add it to a specific inventory slot
-			//Slot must be empty
-			m_pInterface->Inventory_AddItem(m_InventorySlot, item);
-		}
-	}
-
-	if(m_UseItem)
-	{
-		//Use an item (make sure there is an item at the given inventory slot)
-		m_pInterface->Inventory_UseItem(m_InventorySlot);
-	}
-
-	if(m_RemoveItem)
-	{
-		//Remove an item from a inventory slot
-		m_pInterface->Inventory_RemoveItem(m_InventorySlot);
-	}
-
-	//Simple Seek Behaviour (towards Target)
-	steering.LinearVelocity = nextTargetPos - agentInfo.Position; //Desired Velocity
+	steering.LinearVelocity = m_DesiredVelocity; //Desired Velocity
 	steering.LinearVelocity.Normalize(); //Normalize Desired Velocity
 	steering.LinearVelocity *= agentInfo.MaxLinearSpeed; //Rescale to Max Speed
 
-	if(Distance(nextTargetPos, agentInfo.Position) < 2.f)
-	{
-		steering.LinearVelocity = Elite::ZeroVector2;
-	}
+	steering.AngularVelocity = m_DesiredRotationVelocity;
+	steering.AngularVelocity *= agentInfo.MaxAngularSpeed;
 
 	//steering.AngularVelocity = m_AngSpeed; //Rotate your character to inspect the world while walking
 	steering.AutoOrient = false; //Setting AutoOrient to TRue overrides the AngularVelocity
-
 	steering.RunMode = m_CanRun; //If RunMode is True > MaxLinSpd is increased for a limited time (till your stamina runs out)
 
-	//SteeringPlugin_Output is works the exact same way a SteeringBehaviour output
 
-//@End (Demo Purposes)
-	m_GrabItem = false; //Reset State
-	m_UseItem = false;
-	m_RemoveItem = false;
+	// Reset the desired input
+	m_DesiredVelocity = Elite::ZeroVector2;
+	m_DesiredRotationVelocity = 0.0f;
+	m_Sprint = false;
 
 	return steering;
 }
@@ -198,3 +175,4 @@ vector<EntityInfo> Plugin::GetEntitiesInFOV() const
 
 	return vEntitiesInFOV;
 }
+
