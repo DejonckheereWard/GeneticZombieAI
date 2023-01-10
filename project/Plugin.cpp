@@ -111,6 +111,10 @@ SteeringPlugin_Output Plugin::UpdateSteering(float dt)
 		}
 	}
 
+	Elite::Vector2 forwardVector{ cosf(agentInfo.Orientation), sinf(agentInfo.Orientation) };
+	Elite::Vector2 rightVector{ -sinf(agentInfo.Orientation), cosf(agentInfo.Orientation) };
+	m_DesiredVelocity = forwardVector * m_DesiredVelocity.x + rightVector * m_DesiredVelocity.y;
+
 	steering.LinearVelocity = m_DesiredVelocity; //Desired Velocity
 	steering.LinearVelocity.Normalize(); //Normalize Desired Velocity
 	steering.LinearVelocity *= agentInfo.MaxLinearSpeed; //Rescale to Max Speed
