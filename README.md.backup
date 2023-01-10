@@ -89,7 +89,7 @@ This will generate a mapping between every state and its best corresponding acti
 For value based methods we train a value function, that maps a state to the expected value of being at that state.
 
 The value of a state is the expected discounted reward the agent can get if it starts in that state.
-The agent will then always act so that it ends up in a more rewarding state. 
+The agent will then always act so that it ends up in a more rewarding state.
 
 ### Sources:
 * https://huggingface.co/deep-rl-course
