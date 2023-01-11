@@ -1,8 +1,7 @@
 # GeneticZombieGame
 
 
-
-## Research Notes
+## Research Notes on Deep Reinforcement Learning
 
 Reinforcement learning works on the usage of rewards (Postive and Negative) to learn how to behave in its environment. Do something good (stay alive / pick up coin) will reward the agent with positive points, while taking damage will give a negative reward.  
 The goal of the agent is to maximize the cumulative reward.
@@ -99,6 +98,19 @@ There are 2 value-based algorithms, Q-learning and Deep Q-learning.
 With Q learning, we use a traditional algorithm to create a Q table that helps us find what action to take for each state.  
   
 With Deep Q learning. a neural network is used to approximate the q value
+
+
+# Summary notes...
+
+After many many hours of trying to make either: Pytorch, Tensorflow, OpenNN to work. regardless of integration on with the zombiegame project, Ive come to the conclusion that there's no way ill have a decent project by the end even if I now manage to make it work.  
+I tried to, install tensorflow c library, to no avail, even without GPU support it had missing files, linking errors dependency issues etc etc.  
+More research and trial went on, trying to build tensorflow from scratch, which needed the installation of: Cuda, cuDnn, ZLIB, bavel compiler, Nvidia Nsight & extension...  
+While installing all these I ran into dozen of problems, folder not being where they should be, files not being where they should be, libraries that were nowhere to be found (nvtx (nsight extension tools)), setting up path variables to point to the various requirements and trying to solve each error one by one.  
+Finally making each of these succesfully install, the building using bavel ended up with even more errors and issues.  
+Hours of time went into solving all these errrors, only to end up with a build package that had linking errors, more missing files etc etc.  
+I finally managed to make tensorflow run in a seperate project, I thought great!  
+So, i tried to execute the same steps to include into the zombie game project, but I ran into more issues here, as the zombie game project is only working in 32bit, while tensorflow only works in 64 bit.  
+At this point i gave up on trying.
 
 
 
