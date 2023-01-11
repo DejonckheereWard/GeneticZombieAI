@@ -17,13 +17,14 @@ void Plugin::Initialize(IBaseInterface* pInterface, PluginInfo& info)
 	info.Student_FirstName = "Ward";
 	info.Student_LastName = "Dejonckheere";
 	info.Student_Class = "2DAE07";
-
 }
 
 //Called only once
 void Plugin::DllInit()
 {
 	//Called when the plugin is loaded
+
+	printf("Plugin initialized!\n");
 }
 
 //Called only once

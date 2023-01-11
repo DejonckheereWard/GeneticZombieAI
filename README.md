@@ -91,5 +91,27 @@ For value based methods we train a value function, that maps a state to the expe
 The value of a state is the expected discounted reward the agent can get if it starts in that state.
 The agent will then always act so that it ends up in a more rewarding state. 
 
+
+### Deep RL
+The deep in Deep reinforcement learning comes from the introduction of deep neural networks to solve Reinforcement Learning problems.
+
+There are 2 value-based algorithms, Q-learning and Deep Q-learning. 
+With Q learning, we use a traditional algorithm to create a Q table that helps us find what action to take for each state.  
+  
+With Deep Q learning. a neural network is used to approximate the q value
+
+
+
+## Requirements
+
+* Cuda: https://developer.nvidia.com/cuda-downloads
+* cuDNN: https://developer.nvidia.com/rdp/cudnn-download  
+	- https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-windows
+* Zlib: http://www.winimage.com/zLibDll/zlib123dllx64.zip
+* Pytorch: https://pytorch.org/cppdocs/installing.html
+* NVTX: https://docs.nvidia.com/nvtx/index.html
+
+
 ### Sources:
 * https://huggingface.co/deep-rl-course
+* https://pytorch.org/tutorials/advanced/cpp_extension.html

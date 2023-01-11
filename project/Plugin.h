@@ -2,6 +2,7 @@
 #include "IExamPlugin.h"
 #include "Exam_HelperStructs.h"
 
+
 class IBaseInterface;
 class IExamInterface;
 
@@ -53,6 +54,7 @@ private:
 	void Sprint() { m_Sprint = true; };
 };
 
+
 //ENTRY
 //This is the first function that is called by the host program
 //The plugin returned by this function is also the plugin used by the host program
@@ -62,4 +64,7 @@ extern "C"
 	{
 		return new Plugin();
 	}
+
+	
+
 }

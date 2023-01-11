@@ -441,3 +441,5 @@ FodyWeavers.xsd
 ### Extras for Gameplay programming
 _DEMO_DEBUG/
 _DEMO_RELEASE/
+
+*.backup
