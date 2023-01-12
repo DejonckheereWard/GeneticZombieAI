@@ -1,7 +1,7 @@
 # GeneticZombieGame
 
 
-## Research Notes on Deep Reinforcement Learning
+## Research Notes / study on Deep Reinforcement Learning
 
 Reinforcement learning works on the usage of rewards (Postive and Negative) to learn how to behave in its environment. Do something good (stay alive / pick up coin) will reward the agent with positive points, while taking damage will give a negative reward.  
 The goal of the agent is to maximize the cumulative reward.
@@ -103,18 +103,31 @@ With Deep Q learning. a neural network is used to approximate the q value
 # Summary notes...
 
 After many many hours of trying to make either: Pytorch, Tensorflow, OpenNN to work. regardless of integration on with the zombiegame project, Ive come to the conclusion that there's no way ill have a decent project by the end even if I now manage to make it work.  
+
 I tried to, install tensorflow c library, to no avail, even without GPU support it had missing files, linking errors dependency issues etc etc.  
-More research and trial went on, trying to build tensorflow from scratch, which needed the installation of: Cuda, cuDnn, ZLIB, bavel compiler, Nvidia Nsight & extension...  
+More research and trial went on, trying to build tensorflow from scratch, which needed the installation of: Cuda, cuDnn, ZLIB, bavel compiler, Nvidia Nsight & extensions...  
 While installing all these I ran into dozen of problems, folder not being where they should be, files not being where they should be, libraries that were nowhere to be found (nvtx (nsight extension tools)), setting up path variables to point to the various requirements and trying to solve each error one by one.  
+
 Finally making each of these succesfully install, the building using bavel ended up with even more errors and issues.  
-Hours of time went into solving all these errrors, only to end up with a build package that had linking errors, more missing files etc etc.  
-I finally managed to make tensorflow run in a seperate project, I thought great!  
+Many hours went into solving all these errrors, only to end up with a build package that had linking errors, more missing files etc etc.  
+
+In the end, i did manage to make tensorflow run in a seperate project, I thought I was finally onto something and would maybe be able to have a running project.
 So, i tried to execute the same steps to include into the zombie game project, but I ran into more issues here, as the zombie game project is only working in 32bit, while tensorflow only works in 64 bit.  
-At this point i gave up on trying.
+At this point i gave up on trying to make this work, and thought of how I could do thing differently in future attempts.
+
+
+## Going forwards
+
+If I had the option to redo this project, and start from 0 again, I would rework it so I can make use of python, since python seems to be the best supported programming language when trying to use deep learning, reinforcement learning and other libraries.  
+  
+I would then make a mockup of the ZombieGame given by the teachers (not with all features, but a working basis)
+Because this would then be fully in python, the usage of the libraries will be a lot easier and the focus could be on the implemenation, rather than trying to make an library work for C++
 
 
 
-## Requirements
+
+
+## "Requirements"
 
 * Cuda: https://developer.nvidia.com/cuda-downloads
 * cuDNN: https://developer.nvidia.com/rdp/cudnn-download  
@@ -122,6 +135,8 @@ At this point i gave up on trying.
 * Zlib: http://www.winimage.com/zLibDll/zlib123dllx64.zip
 * Pytorch: https://pytorch.org/cppdocs/installing.html
 * NVTX: https://docs.nvidia.com/nvtx/index.html
+* Tensorflow: https://www.tensorflow.org/install
+* ...
 
 
 ### Sources:
